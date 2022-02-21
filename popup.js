@@ -11,9 +11,11 @@ let sendRequest = (request) => {
 
 //This function sends a message to the ocntent script and requests to highlight
 let requestHighlight = () => {
+  let color = document.getElementById('highlight-color').value;
   //TODO Add additional parameters to the request for colour
   let request = {
     type: 'highlight',
+    color: color,
   };
   //Send the request to content script
   sendRequest(request);
