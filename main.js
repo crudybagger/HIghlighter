@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((req, sender, respond) => {
     let range = selectedText.getRangeAt(0);
     var selectionContents = range.extractContents();
     let span = document.createElement('span');
-    span.style.backgroundColor = 'yellow';
+    span.style.backgroundColor = req.color;
     span.appendChild(selectionContents);
     //TODO: Make an extra variable for colour and add the colour picker in the popup
     range.insertNode(span);
