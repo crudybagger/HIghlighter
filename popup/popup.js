@@ -4,6 +4,15 @@ let initialize = () => {
   let request = {
     type: 'initialize',
   };
+  sendRequest(request, (response) => {
+    let col =
+      response.colors.length > 0
+        ? response.colors[response.colors.length - 1]
+        : '#ffff00';
+    document.getElementById('highlight-color').value = col;
+    document.getElementById('Highlight').style.backgroundColor = col;
+    // document.getElementById('highlight-color').value;
+  });
 };
 
 //This utility function sends the given request/message to the popup
@@ -24,12 +33,32 @@ let requestHighlight = () => {
     color: color,
   };
   //Send the request to content script
-  sendRequest(request, () => {});
+  sendRequest(request, (response) => {
+    return;
+  });
+};
+
+let downloadTxt = () => {
+  let request = {
+    type: 'download',
+  };
+  sendRequest(request, (txt) => {
+    let data = new Blob([txt], { type: 'text/plain' });
+    let btn = document.createElement('a');
+    btn.href = window.URL.createObjectURL(data);
+    btn.download = 'highlights.txt';
+    btn.click();
+  });
 };
 
 //Add the onClick event listner to our button
 document
   .getElementById('Highlight')
   .addEventListener('click', requestHighlight);
+document.getElementById('download').addEventListener('click', downloadTxt);
 
+document.getElementById('highlight-color').addEventListener('input', () => {
+  document.getElementById('Highlight').style.backgroundColor =
+    document.getElementById('highlight-color').value;
+});
 initialize();

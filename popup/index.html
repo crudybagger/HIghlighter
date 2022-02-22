@@ -5,13 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Highlight</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="width: 400px;">
-    <h4>This Button will highlight the Selected text</h4>
-    <Button id="Highlight">Highlight</Button>
-    <input type="color" id="highlight-color" value="#a8a232">
-    <label for=" highlight-color">Highlight Color</label>
+<body>
+    <h2 class="title">Text Highlighter</h2>
+    <p class="instructions">
+        How to use this extension:
+    <ol>
+        <li>Select the text on the page that you want to highlight</li>
+        <li>Pick the colour for the highlight using the colour picker</li>
+        <li>Press Highlight Button!</li>
+    </ol>
+    </p>
+    <div class="input">
+        Pick The Colour:
+        <input type="color" id="highlight-color" value="#ffff00">
+        <Button id="Highlight">Highlight</Button>
+        <Button id="download"> <img src="/assets/icons/download.png" alt="">Download Text</Button>
+    </div>
 </body>
 <script src="popup.js"></script>
 

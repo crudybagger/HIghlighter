@@ -17,7 +17,14 @@ let data = {
 };
 
 let initialize = () => {
-  data = window.localStorage.getItem(window.location);
+  for (let i = 0; i < data.highlights.length; i++) {
+    let range = data.highlights[i];
+    var selectionContents = range.extractContents();
+    let span = document.createElement('span');
+    span.style.backgroundColor = data.colors[i];
+    span.appendChild(selectionContents);
+    range.insertNode(span);
+  }
 };
 
 //Listen for a request from the popup to highlight
@@ -44,7 +51,17 @@ chrome.runtime.onMessage.addListener((req, sender, respond) => {
     respond({ msg: 'Highlight Succesful!!' });
   } else if (req.type === 'initialize') {
     respond(data);
+  } else if (req.type === 'download') {
+    console.log('Request to download');
+    let txt = '';
+    for (let range of data.highlights) {
+      txt = txt + range.toString() + '\n\n\n';
+    }
+    console.log(txt);
+    respond(txt);
   }
+  //   console.log(data);
+  //   saveInstant(data);
 });
 // window.localStorage.setItem('test', 'item');
 // console.log(window.localStorage.getItem('test'));
