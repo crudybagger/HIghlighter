@@ -6,6 +6,20 @@
 //   return span;
 // };
 
+// let sendMessage = (message, callback) => {
+//   chrome.runtime.sendMessage(message, (response) => {
+//     callback(response);
+//   });
+// };
+let data = {
+  highlights: [],
+  colors: [],
+};
+
+let initialize = () => {
+  data = window.localStorage.getItem(window.location);
+};
+
 //Listen for a request from the popup to highlight
 chrome.runtime.onMessage.addListener((req, sender, respond) => {
   //If the request is to highlight:
@@ -25,6 +39,12 @@ chrome.runtime.onMessage.addListener((req, sender, respond) => {
     //TODO: Make an extra variable for colour and add the colour picker in the popup
     range.insertNode(span);
     //Responding is important, Otherwise It throws 'Recieveing end does not exists' error
+    data.highlights.push(range);
+    data.colors.push(req.color);
     respond({ msg: 'Highlight Succesful!!' });
+  } else if (req.type === 'initialize') {
+    respond(data);
   }
 });
+// window.localStorage.setItem('test', 'item');
+// console.log(window.localStorage.getItem('test'));
