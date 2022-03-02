@@ -50,12 +50,23 @@ let downloadTxt = () => {
     btn.click();
   });
 };
+let copyTxt = () => {
+  sendRequest({ type: 'download' }, (txt) => {
+    console.log(txt);
+    navigator.clipboard.writeText(txt);
+  });
+  document
+    .getElementById('clipboard')
+    .setAttribute('src', '/assets/icons/check.png');
+};
 
 //Add the onClick event listner to our button
 document
   .getElementById('Highlight')
   .addEventListener('click', requestHighlight);
 document.getElementById('download').addEventListener('click', downloadTxt);
+
+document.getElementById('copy').addEventListener('click', copyTxt);
 
 document.getElementById('highlight-color').addEventListener('input', () => {
   document.getElementById('Highlight').style.backgroundColor =
