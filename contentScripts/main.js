@@ -21,14 +21,13 @@ chrome.runtime.onMessage.addListener((req, _sender, respond) => {
   if (req.type === 'highlight') {
     //Get the selected text
     let selectedText = window.getSelection();
+    let selection = selectedText.toString();
     //If it is an empty selection, Return
-    if (selectedText.toString() === '') return;
+    if (selection === '') return;
 
     let success = makeHighlitedNode(selectedText, req.color, id);
     if (success) {
-      // range.insertNode(newNode);
-      // data.highlights.push(range);
-      // data.colors.push(req.color);
+      data.highlights.push(selection);
       id++;
     } else {
       alert('Cannot highlight already highligted text');
@@ -41,10 +40,9 @@ chrome.runtime.onMessage.addListener((req, _sender, respond) => {
   } else if (req.type === 'download') {
     console.log('Request to download');
     let txt = '';
-    for (let range of data.highlights) {
-      txt = txt + range.toString() + '\n\n\n';
+    for (let str of data.highlights) {
+      txt = txt + str + '\n\n\n';
     }
-    console.log(txt);
     respond(txt);
   }
   //   console.log(data);

@@ -16,7 +16,6 @@ let makeHighlitedNode = (sel, color, id) => {
   while (!container.innerHTML) {
     container = container.parentNode;
   }
-  console.log(container, info);
   let rt = recursiveWrapper(container, info);
   if (sel.removeAllRanges) sel.removeAllRanges();
 
@@ -71,7 +70,6 @@ function _recursiveWrapper(
       if (anchor !== ele && focus !== ele) return; // If the element is not the anchor or focus, continue
 
       startFound = true;
-      console.log('found the correct orientation!!');
       startIndex = Math.min(
         ...[
           ...(anchor == ele ? [anchorOffset] : []),

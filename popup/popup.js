@@ -52,7 +52,6 @@ let downloadTxt = () => {
 };
 let copyTxt = () => {
   sendRequest({ type: 'download' }, (txt) => {
-    console.log(txt);
     navigator.clipboard.writeText(txt);
   });
   document
