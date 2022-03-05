@@ -141,6 +141,7 @@ function _recursiveWrapper(
     const highlightNode = document.createElement('span');
     highlightNode.classList.add('hilighted');
     highlightNode.style.backgroundColor = color;
+    highlightNode.style.color = Luminance(color) > 0.3 ? 'black' : 'white';
     highlightNode.dataset.highlightId = highlightIndex;
     highlightNode.textContent = highlightTextEl.nodeValue;
     highlightTextEl.remove();
@@ -148,3 +149,18 @@ function _recursiveWrapper(
   });
   return [startFound, charsHighlighted];
 }
+
+let Luminance = (hex) => {
+  let color = {
+    r: ('0x' + hex[1] + hex[2]) | 0,
+    g: ('0x' + hex[3] + hex[4]) | 0,
+    b: ('0x' + hex[5] + hex[6]) | 0,
+  };
+  let { r, g, b } = color;
+  r = r / 255;
+  g = g / 255;
+  b = b / 255;
+  let mn = Math.min(r, g, b);
+  let mx = Math.max(r, g, b);
+  return (mx + mn) / 2;
+};

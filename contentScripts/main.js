@@ -5,14 +5,7 @@ let data = {
 let id = 0;
 
 let initialize = () => {
-  for (let i = 0; i < data.highlights.length; i++) {
-    let range = data.highlights[i];
-    var selectionContents = range.extractContents();
-    let span = document.createElement('span');
-    span.style.backgroundColor = data.colors[i];
-    span.appendChild(selectionContents);
-    range.insertNode(span);
-  }
+  return;
 };
 
 //Listen for a request from the popup to highlight
