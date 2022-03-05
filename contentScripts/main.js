@@ -28,13 +28,14 @@ chrome.runtime.onMessage.addListener((req, _sender, respond) => {
     let success = makeHighlitedNode(selectedText, req.color, id);
     if (success) {
       data.highlights.push(selection);
+      data.colors.push(req.color);
       id++;
     } else {
       alert('Cannot highlight already highligted text');
     }
     //Responding is important, Otherwise It throws 'Recieveing end does not exists' error
 
-    respond({ msg: 'Highlight Succesful!!' });
+    respond({ color: 'Highlight Succesful!!' });
   } else if (req.type === 'initialize') {
     respond(data);
   } else if (req.type === 'download') {
