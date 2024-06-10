@@ -14,4 +14,4 @@ Chrome Extension to highlight the selected text on any page
 1. Select the text you want to highlight on any page.
 2. Click the extension button on the upper right part of your browser.
 3. Select the color and press highlight !
-4. Download all your highlighted text in a .txt file, or copy to clipboard using the given buttons.
+4. Download all your highlighted text or copy to clipboard using the given buttons.
